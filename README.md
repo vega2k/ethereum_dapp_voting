@@ -1,13 +1,4 @@
 
-# Election - DAPP Tutorial
-Build your first decentralized application, or Dapp, on the Ethereum Network with this tutorial!
-
-**Full Free Video Tutorial:**
-https://youtu.be/3681ZYbDSSk
-
-
-Follow the steps below to download, install, and run this project.
-
 ## Dependencies
 Install these prerequisites to follow along with the tutorial. See free video tutorial or a full explanation of each prerequisite.
 - NPM: https://nodejs.org
@@ -33,7 +24,6 @@ Open the Ganache GUI client that you downloaded and installed. This will start y
 You must migrate the election smart contract each time your restart ganache.
 
 ## Step 5. Configure Metamask
-See free video tutorial for full explanation of these steps:
 - Unlock Metamask
 - Connect metamask to your local Etherum blockchain provided by Ganache.
 - Import an account provided by ganache.
@@ -42,5 +32,4 @@ See free video tutorial for full explanation of these steps:
 `$ npm run dev`
 Visit this URL in your browser: http://localhost:3000
 
-If you get stuck, please reference the free video tutorial.
 
