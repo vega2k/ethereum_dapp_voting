@@ -78,9 +78,6 @@ App = {
       return electionInstance.candidatesCount();
     }).then(function (candidatesCount) {
       App.count = candidatesCount;
-      // loader.hide();
-      // content.show();
-      // console.log('333 length ' + $('#candidatesResults').children('tr').length);
 
       console.log('candidatesCount ',candidatesCount);
       var candidatesResults = $("#candidatesResults");
@@ -104,7 +101,6 @@ App = {
           candidatesSelect.append(candidateOption);
         });
       }
-      
       return electionInstance.voters(App.account);
     }).then(function(hasVoted) {
       // Do not allow a user to vote
@@ -113,9 +109,15 @@ App = {
       }
       loader.hide();
       content.show();
+      /*
+      *  event 가 발생할때 마다 listenForEvents() 함수가 호출되고,
+      *  listenForEvents()가 render() 함수를 호출되기 때문에 #candidatesResults 에 중복된 목록이 출력된다.
+      * 중복해서 출력되지 않도록 cadidateCount(App.count) 보다 table에 출력된 tr의 갯수를 비교하여
+      * App.count 보다 큰 tr를 삭제하였음
+      */
       var tr_length = $('#candidatesResults').children('tr').length; 
       if(tr_length > App.count){
-        console.log('333 length ' + $('#candidatesResults').children('tr').length);
+        console.log('tr length ' + $('#candidatesResults').children('tr').length);
         var tr_index = App.count - 1;
         $('#candidatesResults tr:gt('+ tr_index +')').empty();
       }  
@@ -128,6 +130,7 @@ App = {
   castVote: function() {
     var candidateId = $('#candidatesSelect').val();
     App.contracts.Election.deployed().then(function (instance) {
+      //응답시간이 오래 걸리면  Loading 화면으로 빨리 전환하기 위해 vote() 함수를 호출하기 전에 먼저 보여주었음
       $("#content").hide();
       $("#loader").show();
       return instance.vote(candidateId, { from: App.account });
